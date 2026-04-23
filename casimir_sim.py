@@ -10,11 +10,13 @@ def calculate_casimir_pressure(distance_nm, material='gold'):
     d = distance_nm * 1e-9 
     p_ideal = -(np.pi**2 * h_bar * c) / (240 * d**4)
     
-    # Mitigation Material Library
+    # Expanded Mitigation Library
     plasma_wavelengths = {
-        'gold': 137e-9,      # Research Baseline
-        'silicon': 310e-9,   # Semiconductor Mitigation
-        'graphite': 600e-9   # Maximum Structural Stability
+        'gold': 137e-9,      # Baseline
+        'ito': 200e-9,       # Tunable Conductor
+        'silicon': 310e-9,   # Semiconductor
+        'germanium': 400e-9, # High-index Semiconductor
+        'graphite': 600e-9   # Max Structural Stability
     }
     
     lp = plasma_wavelengths.get(material, 0)
@@ -24,34 +26,32 @@ def calculate_casimir_pressure(distance_nm, material='gold'):
     return p_ideal * eta
 
 def main():
-    distances = np.linspace(5, 100, 200)
-    materials = ['gold', 'silicon', 'graphite']
-    colors = ['#d4af37', '#4a90e2', '#2c3e50'] # Gold, Blue, Charcoal
+    distances = np.linspace(5, 50, 100)
+    materials = ['gold', 'ito', 'silicon', 'germanium', 'graphite']
+    colors = ['#d4af37', '#27ae60', '#4a90e2', '#e67e22', '#2c3e50'] 
     
-    print("--- Track A: Force Mitigation Analysis ---")
-    print(f"{'Dist (nm)':<10} | {'Gold (Pa)':<15} | {'Silicon (Pa)':<15} | {'Graphite (Pa)':<15}")
-    print("-" * 65)
+    print("--- Track A: Advanced Mitigation Analysis ---")
+    print(f"{'Dist (nm)':<10} | {'Gold (Pa)':<12} | {'ITO (Pa)':<12} | {'Germ (Pa)':<12} | {'Graph (Pa)':<12}")
+    print("-" * 75)
     
-    for d in [5, 10, 50]:
+    for d in [5, 10, 25]:
         row = [calculate_casimir_pressure(d, m) for m in materials]
-        print(f"{d:<10} | {row[0]:<15.2e} | {row[1]:<15.2e} | {row[2]:<15.2e}")
+        print(f"{d:<10} | {row[0]:<12.2e} | {row[1]:<12.2e} | {row[3]:<12.2e} | {row[4]:<12.2e}")
 
-    # --- VISUALIZATION ---
     plt.figure(figsize=(10, 6))
     for m, color in zip(materials, colors):
         p_real = [calculate_casimir_pressure(d, m) for d in distances]
-        plt.plot(distances, np.abs(p_real), color=color, linewidth=2, label=m.capitalize())
+        plt.plot(distances, np.abs(p_real), color=color, linewidth=2, label=m.upper())
     
     plt.yscale('log')
-    plt.title('Casimir Pressure: Structural Mitigation Strategy')
+    plt.title('Casimir Stress Mitigation: Advanced Materials')
     plt.xlabel('Distance (nm)')
     plt.ylabel('Magnitude of Pressure (Pa)')
     plt.grid(True, which="both", ls="-", alpha=0.3)
     plt.legend()
     
-    output_file = "casimir_mitigation_compare.png"
-    plt.savefig(output_file)
-    print(f"\n✅ SUCCESS: Mitigation plot saved to: {os.path.abspath(output_file)}")
+    plt.savefig("casimir_advanced_compare.png")
+    print(f"\n✅ SUCCESS: Plot saved to: {os.path.abspath('casimir_advanced_compare.png')}")
 
 if __name__ == "__main__":
     main()
