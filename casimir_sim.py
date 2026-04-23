@@ -4,12 +4,26 @@ import subprocess
 import consistency_audit
 import weight_mapper
 
+LEADERBOARD_FILE = 'leaderboard.json'
+
 def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
 
+def load_leaderboard():
+    if os.path.exists(LEADERBOARD_FILE):
+        with open(LEADERBOARD_FILE, 'r') as f:
+            return json.load(f)
+    return {"best_time": 2.2, "miner_id": "Baseline", "material": "Graphite-Pd"}
+
+def save_leaderboard(data):
+    with open(LEADERBOARD_FILE, 'w') as f:
+        json.dump(data, f, indent=4)
+
 def show_menu():
+    leaderboard = load_leaderboard()
     print("==========================================")
     print("   GRANDFATHER LEGACY: MASTER CONSOLE     ")
+    print(f"   🏆 Record: {leaderboard['best_time']}s by {leaderboard['miner_id']}")
     print("==========================================")
     print("1. [Track A] Physics: Casimir Pressure")
     print("2. [Track B] Kinetics: Pd-H Loading")
@@ -25,7 +39,7 @@ def main():
 
         if choice == '1':
             print("\nLaunching Track A Physics Engine...")
-            print("Running Casimir pressure gradients...")
+            # Placeholder for future Casimir logic integration
         
         elif choice == '2':
             print("\nLaunching Track B Lattice Simulation...")
@@ -33,44 +47,39 @@ def main():
             
         elif choice == '3':
             print("\nLaunching Track C Mathematical Auditor...")
-            
-            # --- NEW AUTOMATED FILE READING LOGIC ---
             submission_file = 'submission.json'
             
             if os.path.exists(submission_file):
                 with open(submission_file, 'r') as f:
-                    data = json.load(f)
+                    sub = json.load(f)
                 
-                miner_time = data.get("loading_time")
-                miner_id = data.get("miner_id")
+                m_time = sub.get("loading_time")
+                m_id = sub.get("miner_id")
+                m_mat = sub.get("material")
                 
-                print(f"📂 Found submission from {miner_id} ({miner_time}s)")
+                # Step A: Audit
+                score = consistency_audit.run_physical_audit(None, m_time)
                 
-                # Step A: Audit the score
-                score = consistency_audit.run_physical_audit(None, miner_time)
-                
-                # Step B: Map to TAO Weight
-                print("\n--- Phase 2: Tokenomic Payout ---")
+                # Step B: Weight Mapping
                 weight = weight_mapper.calculate_tao_emission(score)
                 
-                print(f"\n[SUMMARY] Submission Verified.")
-                print(f"RANK: {score} | WEIGHT: {weight:.4f}")
+                # Step C: Leaderboard Check
+                lb = load_leaderboard()
+                if m_time < lb['best_time']:
+                    print(f"\n🎊 NEW WORLD RECORD: {m_time}s!")
+                    save_leaderboard({"best_time": m_time, "miner_id": m_id, "material": m_mat})
+                
+                print(f"\n[SUMMARY] Verified: {m_id} | Rank: {score} | Weight: {weight:.4f}")
             else:
-                print(f"\n❌ Error: No '{submission_file}' found.")
-                print("Please run 'python miner_template.py' first to generate a result.")
-            # ------------------------------------------
+                print(f"\n❌ Error: No submission.json found.")
 
         elif choice == '4':
-            plot_path = 'loading_kinetics.png'
-            if os.path.exists(plot_path):
-                print(f"\nOpening {plot_path}...")
-                if os.name == 'nt': os.startfile(plot_path)
-                else: subprocess.run(['open', plot_path])
+            if os.path.exists('loading_kinetics.png'):
+                os.startfile('loading_kinetics.png') if os.name == 'nt' else subprocess.run(['open', 'loading_kinetics.png'])
             else:
-                print("\n❌ Error: No plot found. Run Option 2 first.")
+                print("\n❌ Error: No plot found.")
 
         elif choice == '5':
-            print("\nShutting down Grandfather Legacy console. Goodbye.")
             break
         
         input("\nPress Enter to return to menu...")
