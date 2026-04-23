@@ -5,52 +5,54 @@ import matplotlib.pyplot as plt
 import os
 
 def calculate_casimir_pressure(distance_nm, material='gold'):
-    """
-    Calculates Casimir Pressure with a correction for Finite Conductivity.
-    """
     h_bar = 1.0545718e-34 
     c = 2.99792458e8       
     d = distance_nm * 1e-9 
-    
-    # Ideal Pressure
     p_ideal = -(np.pi**2 * h_bar * c) / (240 * d**4)
     
-    # Finite Conductivity Correction (Plasma Wavelength of Gold ~137nm)
-    # This is a simplified correction factor for real-world metals
-    lambda_p = 137e-9 
-    eta = 1 / (1 + (lambda_p / d))
+    # Material-specific Plasma Wavelengths (lambda_p)
+    plasma_wavelengths = {
+        'silver': 130e-9,  # High conductivity
+        'gold': 137e-9,    # Standard benchmark
+        'silicon': 250e-9  # Semiconductor (less conductive)
+    }
     
+    lp = plasma_wavelengths.get(material, 0)
+    if lp == 0: return p_ideal
+    
+    # Finite Conductivity Correction Factor
+    eta = 1 / (1 + (lp / d))
     return p_ideal * eta
 
 def main():
     distances = np.linspace(5, 100, 200)
-    p_ideal = [calculate_casimir_pressure(d, material='ideal') / (1 / (1 + (137e-9 / (d*1e-9)))) for d in distances]
-    p_real = [calculate_casimir_pressure(d, material='gold') for d in distances]
+    materials = ['silver', 'gold', 'silicon']
+    colors = ['#C0C0C0', '#d4af37', '#4a90e2'] # Silver, Gold, Blue
     
-    print("--- Track A: Refined Casimir Analysis (Gold) ---")
-    print(f"{'Distance (nm)':<15} | {'Ideal (Pa)':<15} | {'Real (Pa)':<15}")
-    print("-" * 50)
+    print("--- Track A: Multi-Material Casimir Analysis ---")
+    print(f"{'Dist (nm)':<10} | {'Silver (Pa)':<12} | {'Gold (Pa)':<12} | {'Silicon (Pa)':<12}")
+    print("-" * 55)
     
     for d in [5, 10, 50]:
-        real = calculate_casimir_pressure(d)
-        ideal = real / (1 / (1 + (137e-9 / (d*1e-9))))
-        print(f"{d:<15} | {ideal:<15.2e} | {real:<15.2e}")
+        row = [calculate_casimir_pressure(d, m) for m in materials]
+        print(f"{d:<10} | {row[0]:<12.2e} | {row[1]:<12.2e} | {row[2]:<12.2e}")
 
     # --- VISUALIZATION ---
     plt.figure(figsize=(10, 6))
-    plt.plot(distances, np.abs(p_ideal), 'k--', alpha=0.5, label='Theoretical Ideal')
-    plt.plot(distances, np.abs(p_real), color='#d4af37', linewidth=2, label='Gold (Finite Conductivity)')
+    for m, color in zip(materials, colors):
+        p_real = [calculate_casimir_pressure(d, m) for d in distances]
+        plt.plot(distances, np.abs(p_real), color=color, linewidth=2, label=m.capitalize())
     
     plt.yscale('log')
-    plt.title('Casimir Pressure: Ideal vs. Real-World Gold')
+    plt.title('Casimir Pressure: Material Comparison (Ag vs Au vs Si)')
     plt.xlabel('Distance (nm)')
     plt.ylabel('Magnitude of Pressure (Pa)')
     plt.grid(True, which="both", ls="-", alpha=0.3)
     plt.legend()
     
-    output_file = "casimir_refined.png"
+    output_file = "casimir_material_compare.png"
     plt.savefig(output_file)
-    print(f"\n✅ SUCCESS: Refined plot saved to: {os.path.abspath(output_file)}")
+    print(f"\n✅ SUCCESS: Comparison plot saved to: {os.path.abspath(output_file)}")
 
 if __name__ == "__main__":
     main()
