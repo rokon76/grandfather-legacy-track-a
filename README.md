@@ -19,3 +19,8 @@ Create a file named `.env` in your root directory (this is already ignored by `.
 ```text
 TG_TOKEN=your_bot_token_here
 TG_CHAT_ID=your_chat_id_here
+
+## 📊 Network Statistics
+- **Current World Record:** 🏆 `2.05s` (Miner_Alpha_01)
+- **Verified Lattice Gap:** `0.3nm`
+- **Network Difficulty:** Sub-2.1s (Requires > 500k ATM)
