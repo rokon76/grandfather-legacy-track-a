@@ -1,6 +1,16 @@
-# Ignore local credentials
-notifier.py
+# 🔐 Security & Credentials
 .env
+*.pem
+*.key
+
+# 🐍 Python environment
 __pycache__/
-*.log
-submission.json
+*.py[cod]
+*$py.class
+gfl_env/
+venv/
+
+# 📂 Local Data & Submissions
+submissions/
+*.json
+!example_submission.json
