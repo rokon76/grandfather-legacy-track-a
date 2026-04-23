@@ -1,43 +1,69 @@
-import numpy as np
-import matplotlib.pyplot as plt
+import os
+import subprocess
+import weight_mapper  # Phase 2 Integration
 
-def calculate_casimir_pressure(dist_nm, lambda_p):
-    """Calculates Casimir pressure based on plasma wavelength."""
-    c = 3e8
-    hbar = 1.054e-34
-    dist_m = dist_nm * 1e-9
-    # Simplified Lifshitz-type approximation for research
-    pressure = (hbar * c * np.pi**2) / (240 * dist_m**4) * (lambda_p / (lambda_p + dist_m))
-    return pressure
+def clear_screen():
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+def show_menu():
+    print("==========================================")
+    print("   GRANDFATHER LEGACY: MASTER CONSOLE     ")
+    print("==========================================")
+    print("1. [Track A] Physics: Casimir Pressure")
+    print("2. [Track B] Kinetics: Pd-H Loading")
+    print("3. [Track C] Auditor: Scoring & Weights")
+    print("4. [Visual]  View Latest Kinetic Plot")
+    print("5. [Exit]    Shutdown System")
+    print("==========================================")
 
 def main():
-    print("--- Track A: Casimir Material Analysis ---")
-    distances = np.linspace(5, 50, 100)
-    
-    # Expanded Material Library
-    materials = {
-        'Gold': 137e-9,
-        'ITO': 200e-9,
-        'Silicon': 310e-9,
-        'Germanium': 400e-9,
-        'Graphite': 600e-9
-    }
-    
-    plt.figure(figsize=(10, 6))
-    for name, lp in materials.items():
-        pressures = [calculate_casimir_pressure(d, lp) for d in distances]
-        plt.plot(distances, pressures, label=f"{name} (λp={lp*1e9:.0f}nm)")
-        print(f"✅ Simulated {name} lattice profile.")
+    while True:
+        show_menu()
+        choice = input("\nSelect an operation: ")
 
-    plt.yscale('log')
-    plt.xlabel('Distance (nm)')
-    plt.ylabel('Pressure (Pa)')
-    plt.title('Casimir Pressure vs. Distance (Material Comparison)')
-    plt.legend()
-    plt.grid(True, which="both", ls="-", alpha=0.5)
-    
-    plt.savefig('casimir_comparison.png')
-    print("\n[SUCCESS] Plot saved as casimir_comparison.png")
+        if choice == '1':
+            print("\nLaunching Track A Physics Engine...")
+            subprocess.run(['python', 'casimir_sim.py'], shell=True)
+        
+        elif choice == '2':
+            print("\nLaunching Track B Lattice Simulation...")
+            # This triggers the kinetics and saves the .png
+            subprocess.run(['python', 'lattice_sim.py'], shell=True)
+            
+        elif choice == '3':
+            print("\nLaunching Track C Mathematical Auditor...")
+            # We import and run the audit logic
+            import consistency_audit
+            
+            # For this Phase 2 test, we use the Ni-Pd Alloy record (2.00s)
+            miner_time = 2.00 
+            score = consistency_audit.run_physical_audit(None, miner_time)
+            
+            # --- PHASE 2 INTEGRATION ---
+            print("\n--- Phase 2: Tokenomic Payout ---")
+            weight = weight_mapper.calculate_tao_emission(score)
+            
+            print(f"\n[SUMMARY] Submission Verified.")
+            print(f"RANK: {score} | WEIGHT: {weight:.4f}")
+            print("------------------------------------------")
+
+        elif choice == '4':
+            plot_path = 'loading_kinetics.png'
+            if os.path.exists(plot_path):
+                print(f"\nOpening {plot_path}...")
+                os.startfile(plot_path) if os.name == 'nt' else subprocess.run(['open', plot_path])
+            else:
+                print("\n❌ Error: No plot found. Run Option 2 first.")
+
+        elif choice == '5':
+            print("\nShutting down Grandfather Legacy console. Goodbye.")
+            break
+        
+        else:
+            print("\n❌ Invalid selection. Please try again.")
+        
+        input("\nPress Enter to return to menu...")
+        clear_screen()
 
 if __name__ == "__main__":
     main()
