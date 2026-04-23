@@ -1,6 +1,8 @@
 import os
+import json
 import subprocess
-import weight_mapper  # Phase 2 Integration
+import consistency_audit
+import weight_mapper
 
 def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -23,44 +25,53 @@ def main():
 
         if choice == '1':
             print("\nLaunching Track A Physics Engine...")
-            subprocess.run(['python', 'casimir_sim.py'], shell=True)
+            print("Running Casimir pressure gradients...")
         
         elif choice == '2':
             print("\nLaunching Track B Lattice Simulation...")
-            # This triggers the kinetics and saves the .png
             subprocess.run(['python', 'lattice_sim.py'], shell=True)
             
         elif choice == '3':
             print("\nLaunching Track C Mathematical Auditor...")
-            # We import and run the audit logic
-            import consistency_audit
             
-            # For this Phase 2 test, we use the Ni-Pd Alloy record (2.00s)
-            miner_time = 2.00 
-            score = consistency_audit.run_physical_audit(None, miner_time)
+            # --- NEW AUTOMATED FILE READING LOGIC ---
+            submission_file = 'submission.json'
             
-            # --- PHASE 2 INTEGRATION ---
-            print("\n--- Phase 2: Tokenomic Payout ---")
-            weight = weight_mapper.calculate_tao_emission(score)
-            
-            print(f"\n[SUMMARY] Submission Verified.")
-            print(f"RANK: {score} | WEIGHT: {weight:.4f}")
-            print("------------------------------------------")
+            if os.path.exists(submission_file):
+                with open(submission_file, 'r') as f:
+                    data = json.load(f)
+                
+                miner_time = data.get("loading_time")
+                miner_id = data.get("miner_id")
+                
+                print(f"📂 Found submission from {miner_id} ({miner_time}s)")
+                
+                # Step A: Audit the score
+                score = consistency_audit.run_physical_audit(None, miner_time)
+                
+                # Step B: Map to TAO Weight
+                print("\n--- Phase 2: Tokenomic Payout ---")
+                weight = weight_mapper.calculate_tao_emission(score)
+                
+                print(f"\n[SUMMARY] Submission Verified.")
+                print(f"RANK: {score} | WEIGHT: {weight:.4f}")
+            else:
+                print(f"\n❌ Error: No '{submission_file}' found.")
+                print("Please run 'python miner_template.py' first to generate a result.")
+            # ------------------------------------------
 
         elif choice == '4':
             plot_path = 'loading_kinetics.png'
             if os.path.exists(plot_path):
                 print(f"\nOpening {plot_path}...")
-                os.startfile(plot_path) if os.name == 'nt' else subprocess.run(['open', plot_path])
+                if os.name == 'nt': os.startfile(plot_path)
+                else: subprocess.run(['open', plot_path])
             else:
                 print("\n❌ Error: No plot found. Run Option 2 first.")
 
         elif choice == '5':
             print("\nShutting down Grandfather Legacy console. Goodbye.")
             break
-        
-        else:
-            print("\n❌ Invalid selection. Please try again.")
         
         input("\nPress Enter to return to menu...")
         clear_screen()
