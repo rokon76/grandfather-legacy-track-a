@@ -10,11 +10,15 @@ def calculate_casimir_pressure(distance_nm, material='gold'):
     d = distance_nm * 1e-9 
     p_ideal = -(np.pi**2 * h_bar * c) / (240 * d**4)
     
-    # Material-specific Plasma Wavelengths (lambda_p)
+   # Material-specific Plasma Wavelengths (lambda_p) in meters
     plasma_wavelengths = {
-        'silver': 130e-9,  # High conductivity
-        'gold': 137e-9,    # Standard benchmark
-        'silicon': 250e-9  # Semiconductor (less conductive)
+        'silver': 130e-9,    # Maximum crushing force
+        'aluminum': 80e-9,    # Very high force (UV reflector)
+        'gold': 137e-9,      # Baseline
+        'titanium': 250e-9,  # Mid-range
+        'silicon': 310e-9,   # Semiconductor (reduced force)
+        'germanium': 400e-9, # Low force
+        'graphite': 600e-9   # Minimum structural force
     }
     
     lp = plasma_wavelengths.get(material, 0)
