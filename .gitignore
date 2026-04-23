@@ -1,0 +1,6 @@
+# Ignore local credentials
+notifier.py
+.env
+__pycache__/
+*.log
+submission.json
