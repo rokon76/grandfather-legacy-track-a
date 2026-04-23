@@ -9,3 +9,13 @@ This repository serves as the **Owner of Truth** for the subnet. It utilizes a m
 Submissions are rejected if:
 - Loading time is >= 2.2s.
 - The claim violates the **Pressure-Time Constraint** (Sub-2.1s requires > 500k ATM).
+## 🛠️ Local Setup & Telegram Configuration
+
+To protect network security, private API keys and credentials are not stored in this repository. To enable real-time Telegram alerts for your validator node, follow these steps:
+
+### 1. Create your Environment File
+Create a file named `.env` in your root directory (this is already ignored by `.gitignore`) and add your credentials:
+
+```text
+TG_TOKEN=your_bot_token_here
+TG_CHAT_ID=your_chat_id_here
