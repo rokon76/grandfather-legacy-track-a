@@ -10,34 +10,31 @@ def calculate_casimir_pressure(distance_nm, material='gold'):
     d = distance_nm * 1e-9 
     p_ideal = -(np.pi**2 * h_bar * c) / (240 * d**4)
     
-    # Expanded Material Library
+    # Mitigation Material Library
     plasma_wavelengths = {
-        'silver': 130e-9,    # Maximum crushing force
-        'gold': 137e-9,      # Baseline
-        'silicon': 310e-9,   # Reduced force
-        'graphite': 600e-9   # Minimum structural force (Longer lambda_p)
+        'gold': 137e-9,      # Research Baseline
+        'silicon': 310e-9,   # Semiconductor Mitigation
+        'graphite': 600e-9   # Maximum Structural Stability
     }
     
     lp = plasma_wavelengths.get(material, 0)
     if lp == 0: return p_ideal
     
-    # Finite Conductivity Correction Factor
     eta = 1 / (1 + (lp / d))
     return p_ideal * eta
 
 def main():
     distances = np.linspace(5, 100, 200)
-    materials = ['silver', 'gold', 'silicon', 'graphite']
-    colors = ['#C0C0C0', '#d4af37', '#4a90e2', '#2c3e50'] # Silver, Gold, Blue, Charcoal
+    materials = ['gold', 'silicon', 'graphite']
+    colors = ['#d4af37', '#4a90e2', '#2c3e50'] # Gold, Blue, Charcoal
     
-    print("--- Track A: Multi-Material Casimir Analysis ---")
-    print(f"{'Dist (nm)':<10} | {'Silver (Pa)':<12} | {'Gold (Pa)':<12} | {'Graphite (Pa)':<12}")
+    print("--- Track A: Force Mitigation Analysis ---")
+    print(f"{'Dist (nm)':<10} | {'Gold (Pa)':<15} | {'Silicon (Pa)':<15} | {'Graphite (Pa)':<15}")
     print("-" * 65)
     
     for d in [5, 10, 50]:
         row = [calculate_casimir_pressure(d, m) for m in materials]
-        # Printing Silver, Gold, and Graphite for the direct comparison
-        print(f"{d:<10} | {row[0]:<12.2e} | {row[1]:<12.2e} | {row[3]:<12.2e}")
+        print(f"{d:<10} | {row[0]:<15.2e} | {row[1]:<15.2e} | {row[2]:<15.2e}")
 
     # --- VISUALIZATION ---
     plt.figure(figsize=(10, 6))
@@ -46,15 +43,15 @@ def main():
         plt.plot(distances, np.abs(p_real), color=color, linewidth=2, label=m.capitalize())
     
     plt.yscale('log')
-    plt.title('Casimir Pressure: Structural Force Mitigation (Ag vs Au vs Si vs C)')
+    plt.title('Casimir Pressure: Structural Mitigation Strategy')
     plt.xlabel('Distance (nm)')
     plt.ylabel('Magnitude of Pressure (Pa)')
     plt.grid(True, which="both", ls="-", alpha=0.3)
     plt.legend()
     
-    output_file = "casimir_material_compare.png"
+    output_file = "casimir_mitigation_compare.png"
     plt.savefig(output_file)
-    print(f"\n✅ SUCCESS: Multi-material plot saved to: {os.path.abspath(output_file)}")
+    print(f"\n✅ SUCCESS: Mitigation plot saved to: {os.path.abspath(output_file)}")
 
 if __name__ == "__main__":
     main()
