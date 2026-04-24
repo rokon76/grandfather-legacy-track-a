@@ -7,7 +7,7 @@ Official press resources and brand assets for the Grandfather Legacy (GFL) proje
 * **[Founder Biography](bio.md)**: Background on Robert G. Steele Jr. (40+ Years Tech Ops).
 * **[Project Fact Sheet](fact-sheet.md)**: Technical specs on kernels and Bittensor integration.
 ### 📊 Performance & Data
-* **[Casimir Stress Analysis]((casimir_analysis_high_res.png?v=1))**: High-resolution visualization of pressure zones (5nm to 50nm) used to calibrate our autonomous energy kernels.
+* **[Casimir Stress Analysis]((casimir_analysis_high_res2.png))**: High-resolution visualization of pressure zones (5nm to 50nm) used to calibrate our autonomous energy kernels.
 * **[Lattice Stability Model](lattice_analysis.png)**: Technical breakdown of the simulated quantum grid used for fossil fuel replacement research.
 
 * **🛰️ Vision
