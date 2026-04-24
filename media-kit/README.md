@@ -4,7 +4,7 @@ Official press resources and brand assets for the Grandfather Legacy (GFL) proje
 
 ### 📁 Press Assets
 * **[Official Project Logo](grandfather_legacy_logo.png)**: High-resolution PNG of the Casimir Effect visualization.
-* **[Founder Biography](founder-bio.md)**: Background on Robert G. Steele Jr. (40+ Years Tech Ops).
+* **[Founder Biography](bio.md)**: Background on Robert G. Steele Jr. (40+ Years Tech Ops).
 * **[Project Fact Sheet](fact-sheet.md)**: Technical specs on kernels and Bittensor integration.
 
 ### 🛰️ Vision
