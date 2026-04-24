@@ -9,5 +9,6 @@ Official press resources and brand assets for the Grandfather Legacy (GFL) proje
 ### 📊 Performance & Data
 * **[Casimir Stress Analysis](casimir_analysis_high_res.png)**: High-resolution visualization of pressure zones (5nm to 50nm) used to calibrate our autonomous energy kernels.
 * **[Lattice Stability Model](lattice_analysis.png)**: Technical breakdown of the simulated quantum grid used for fossil fuel replacement research.
-🛰️ Vision
+
+* **🛰️ Vision
 Grandfather Legacy is a DeSci project building Zero-Human Companies dedicated to solving the global energy crisis. We use the Bittensor network to simulate new methods of energy extraction that could ultimately replace fossil fuels with clean, limitless quantum power.
