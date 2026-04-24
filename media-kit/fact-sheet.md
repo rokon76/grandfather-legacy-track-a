@@ -1,15 +1,5 @@
-# Project Fact Sheet: Grandfather Legacy (GFL)
+### 🌎 The Mission: Energy Independence
+Grandfather Legacy (GFL) is exploring the frontier of **Quantum Vacuum Energy**. Our goal is to simulate the extraction of zero-point energy to provide a viable, carbon-free **replacement for fossil fuels**. 
 
-### 🛰️ Technical Overview
-* **Network:** Bittensor (Subnet Integrated)
-* **Core Logic:** High-speed physics kernels for Casimir Effect simulations.
-* **Performance Benchmark:** 2.2s execution cycle for vacuum pressure calculations.
-* **Architecture:** Zero-Management / Autonomous Agent ready.
-
-### 🏛️ The Mission
-Grandfather Legacy (GFL) is designed to prove the viability of **Zero-Human Companies**. By combining decentralized compute power with advanced physical models, GFL provides a transparent, immutable platform for complex scientific discovery.
-
-### 🛠️ Tech Stack
-* **Language:** Python 3.x
-* **Deployment:** Dockerized Subtensor-lite / Linux (Debian)
-* **Security:** Integrated Audit Trail (Track C)
+* **Why it matters:** Unlike solar or wind, vacuum energy is available 24/7, anywhere in the universe. 
+* **The Goal:** To move the world toward a "Post-Combustion" economy through autonomous, decentralized scientific discovery.
