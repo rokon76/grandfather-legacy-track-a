@@ -67,7 +67,7 @@ def generate_press_chart():
              fontsize=8, color='#4b5563', alpha=0.6, family='monospace')
 
     plt.tight_layout()
-    filename = 'casimir_analysis_high_res2.png'
+    filename = 'casimir_analysis_high_res.png'
     plt.savefig(filename, facecolor='#0b0e14', dpi=300)
     print(f"✅ Success: {filename} updated.")
     if os.environ.get('DISPLAY','') != '':
