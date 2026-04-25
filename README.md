@@ -1,3 +1,6 @@
+# 📄 [Project Whitepaper: Lattice QED Simulations](media-kit/WHITEPAPER.md)
+
+---
 ## ⚖️ Validator & Auditing Logic
 This repository serves as the **Owner of Truth** for the subnet. It utilizes a multi-stage audit process:
 
