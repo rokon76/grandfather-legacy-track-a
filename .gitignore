@@ -1,16 +1,25 @@
-# 🔐 Security & Credentials
+# --- GFL Private Data ---
+# This protects your cheat sheets, keys, and private logs
+private/
+*.txt
+*.docx
+*.pdf
 .env
-*.pem
-*.key
 
-# 🐍 Python environment
+# --- Python Environment ---
 __pycache__/
 *.py[cod]
 *$py.class
-gfl_env/
 venv/
+.venv/
 
-# 📂 Local Data & Submissions
-submissions/
-*.json
-!example_submission.json
+# --- Local Data & Logs ---
+# We keep these local so the VPS doesn't get flooded with Windows test data
+*.log
+submission.json
+temp_data/
+
+# --- Operating System Files ---
+.DS_Store
+Thumbs.db
+desktop.ini

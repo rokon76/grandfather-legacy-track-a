@@ -1,0 +1,11 @@
+{
+    "subnet_name": "Grandfather Legacy",
+    "version": "1.0.1",
+    "baseline_benchmark": 2.2,
+    "reward_ratios": {
+        "miner_weight": 0.80,
+        "validator_weight": 0.20
+    },
+    "halving_protocol": "Every 10% improvement in saturation speed",
+    "min_stability_threshold": 0.90
+}
