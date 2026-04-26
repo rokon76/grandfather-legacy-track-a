@@ -21,11 +21,16 @@ The core simulation tracks focus on **Lattice Quantum Electrodynamics (QED)**.
 To maintain network integrity, the GFL subnet utilizes an autonomous validation system hosted on decentralized infrastructure ([srv1490614](https://hpanel.hostinger.com/vps/1490614/docker-manager?state=deployed)).
 
 ### 3.1 Physical Consistency Audit
-Every miner submission is cross-referenced against the **Pressure-Time Constraint**:
+Every miner submission is cross-referenced against the dual-constraint "Ground Truth" model:
 
-$$P \propto \frac{1}{d^4}$$
+1. **Pressure-Time Constraint:**
+   $$P \propto \frac{1}{d^4}$$
+   Where $P$ is pressure and $d$ is the lattice gap. Rapid convergence (<1.5s) requires extreme atmospheric pressure (>750k ATM).
 
-Where $P$ is pressure and $d$ is the lattice gap. If a miner reports a completion time under the target threshold without sufficient atmospheric pressure, the submission is flagged as physically inconsistent and rejected.
+2. **Lattice Energy Threshold:**
+   Submissions must align with the **Lattice Energy Trend** ($LiF$ vs $CsI$ scaling):
+   $$\Delta H_{lattice} \propto \frac{|Q_1Q_2|}{r_0}$$
+   Miners must prove that energy release ($\Delta H$) scales inversely with the ionic radius ($r_0$) and directly with the product of the ionic charges ($Q_1Q_2$). Any submission claiming high-density extraction with a low charge-to-radius ratio is flagged as physically inconsistent and rejected.
 
 ### 3.2 Phase II: Stochastic Noise Filtering
 As of April 2026, all submissions must pass a **Power Spectral Density (PSD)** audit to ensure high-fidelity simulation:
