@@ -20,7 +20,7 @@ To maintain network integrity, the GFL subnet utilizes an autonomous validation 
 
 ### 3.1 Network Standing & Difficulty Anchor
 Difficulty is now dynamically anchored to the [Top 1.108% Wallet Tier](https://taostats.io/pro/portfolio/5Hp5BtPFRoojoJkKKpx56Whq8LVtvABst5sFe9PQzKAkkED3).
-* **Current Difficulty Rank:** [#5,456](https://taostats.io/pro/portfolio/5Hp5BtPFRoojoJkKKpx56Whq8LVtvABst5sFe9PQzKAkkED3)
+* **Current Difficulty Rank:** [#5,019](https://taostats.io/pro/portfolio/5Hp5BtPFRoojoJkKKpx56Whq8LVtvABst5sFe9PQzKAkkED3)
 * **Goal:** To ensure GFL validation logic remains competitive against the highest-performing network participants.
 
 ### 3.2 Performance Benchmarking (SN97 Standard)
