@@ -21,8 +21,8 @@ The core simulation tracks focus on **Lattice Quantum Electrodynamics (QED)**.
 To maintain network integrity, the GFL subnet utilizes an autonomous validation system hosted on the [srv1490614 VPS](https://hpanel.hostinger.com/vps/1490614/docker-manager?state=deployed).
 
 ### 3.1 Network Standing & Difficulty Anchor
-Difficulty is now dynamically anchored to the [Top 1.012% Wallet Tier](https://taostats.io/pro/portfolio/5Hp5BtPFRoojoJkKKpx56Whq8LVtvABst5sFe9PQzKAkkED3).
-* **Current Difficulty Rank:** [#5,019](https://taostats.io/pro/portfolio/5Hp5BtPFRoojoJkKKpx56Whq8LVtvABst5sFe9PQzKAkkED3)
+Difficulty is now dynamically anchored to the [Top 0.979% Wallet Tier](https://taostats.io/pro/portfolio/5Hp5BtPFRoojoJkKKpx56Whq8LVtvABst5sFe9PQzKAkkED3).
+* **Current Difficulty Rank:** [#4,859](https://taostats.io/pro/portfolio/5Hp5BtPFRoojoJkKKpx56Whq8LVtvABst5sFe9PQzKAkkED3)
 * **Goal:** To ensure GFL validation logic remains competitive against the highest-performing network participants.
 
 ### 3.2 Performance Benchmarking (SN97 Standard)
